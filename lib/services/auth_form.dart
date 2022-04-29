@@ -42,9 +42,9 @@ class _AuthFormState extends State<AuthForm> {
         authUser = await _auth.signInWithEmailAndPassword(
             email: email, password: password);
       } else {
-        await DBStore.setData('username', _username);
         authUser = await _auth.createUserWithEmailAndPassword(
             email: email, password: password);
+        await DBStore.setData('username', _username);
       }
       if (mounted) {
         setState(() {
@@ -56,13 +56,13 @@ class _AuthFormState extends State<AuthForm> {
       setState(() {
         _isStartRegister = false;
       });
-      String msg = 'Something went wrong please try again later';
+      String? msg = 'Something went wrong please try again later';
       if (err.message != null) {
-        //msg = err.message;
+        msg = err.message;
       }
-      Scaffold.of(ctx).showSnackBar(
+      ScaffoldMessenger.of(ctx).showSnackBar(
         SnackBar(
-          content: Text(msg),
+          content: Text(msg!),
           backgroundColor: Colors.red,
           duration: const Duration(seconds: 2),
         ),
@@ -71,11 +71,11 @@ class _AuthFormState extends State<AuthForm> {
       setState(() {
         _isStartRegister = false;
       });
-      Scaffold.of(ctx).showSnackBar(
-        const SnackBar(
-          content: Text('Some error occurred'),
+      ScaffoldMessenger.of(ctx).showSnackBar(
+        SnackBar(
+          content: Text(err.toString()),
           backgroundColor: Colors.red,
-          duration: Duration(seconds: 2),
+          duration: const Duration(seconds: 2),
         ),
       );
     }

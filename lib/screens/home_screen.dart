@@ -73,16 +73,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   children: [
                     Card(
+                      elevation: 5,
                       child: ListTile(
                         title: Text(
                           'Hii, ${username!}',
                           style: const TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 18),
                         ),
-                        trailing: Text(
-                          '${fullTime.hour.toString()} : ${fullTime.minute.toString()} :${fullTime.second.toString()}',
+                        subtitle: Text(
+                          'You Logged in at - ${fullTime.hour.toString()} : ${fullTime.minute.toString()} :${fullTime.second.toString()}',
                           style: const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 18),
+                              fontWeight: FontWeight.w700, fontSize: 15),
                         ),
                       ),
                     ),

@@ -15,7 +15,10 @@ class MedicinesCard extends StatelessWidget {
         return Card(
           elevation: 5,
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.symmetric(
+              vertical: 10,
+              horizontal: 30,
+            ),
             child: Column(
               children: [
                 Row(
@@ -25,6 +28,7 @@ class MedicinesCard extends StatelessWidget {
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                     ),
+                    const Spacer(),
                     Text(
                       medicineInfo[i]['name'],
                       style: const TextStyle(fontSize: 18),
@@ -38,6 +42,7 @@ class MedicinesCard extends StatelessWidget {
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                     ),
+                    const Spacer(),
                     Text(
                       medicineInfo[i]['dose'],
                       style: const TextStyle(fontSize: 18),
@@ -51,6 +56,7 @@ class MedicinesCard extends StatelessWidget {
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                     ),
+                    const Spacer(),
                     Text(
                       medicineInfo[i]['strength'],
                       style: const TextStyle(fontSize: 18),

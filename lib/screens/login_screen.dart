@@ -20,8 +20,8 @@ class _LoginScreenState extends State<LoginScreen> {
       body: SafeArea(
         child: BaseUI(
           padding: const EdgeInsets.only(left: 18, top: 20),
-          text1: 'Flutter',
-          text2: 'App',
+          text1: 'Your',
+          text2: 'Medico',
           fontWeight1: FontWeight.w900,
           fontsize1: 50,
           height: 100,
