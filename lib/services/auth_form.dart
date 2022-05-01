@@ -6,6 +6,42 @@ import './db_store.dart';
 import '../constant.dart';
 import '../screens/home_screen.dart';
 
+class EmailFieldValidator {
+  static String? validate(String? value) {
+    if (value != null) {
+      if (!value.contains('@')) {
+        return 'Please enter a valid e-mail address';
+      }
+      return null;
+    }
+    return 'Please enter a valid e-mail address';
+  }
+}
+
+class UsernameFieldValidator {
+  static String? validate(String? value) {
+    if (value != null) {
+      if (value.length < 4) {
+        return 'Username must be 4 characters long';
+      }
+      return null;
+    }
+    return 'Username must be 4 characters long';
+  }
+}
+
+class PasswordFieldValidator {
+  static String? validate(String? value) {
+    if (value != null) {
+      if (value.length < 8) {
+        return 'Password must be 8 characters long';
+      }
+      return null;
+    }
+    return 'Password must be 8 characters long';
+  }
+}
+
 class AuthForm extends StatefulWidget {
   const AuthForm({Key? key}) : super(key: key);
 
@@ -44,6 +80,7 @@ class _AuthFormState extends State<AuthForm> {
       } else {
         authUser = await _auth.createUserWithEmailAndPassword(
             email: email, password: password);
+
         await DBStore.setData('username', _username);
       }
       if (mounted) {
@@ -110,15 +147,7 @@ class _AuthFormState extends State<AuthForm> {
                 key: const ValueKey('email'),
                 keyboardType: TextInputType.emailAddress,
                 decoration: klogininput,
-                validator: (value) {
-                  if (value != null) {
-                    if (!value.contains('@')) {
-                      return 'Please enter a valid e-mail address';
-                    }
-                    return null;
-                  }
-                  return 'Please enter a valid e-mail address';
-                },
+                validator: EmailFieldValidator.validate,
                 onSaved: (value) {
                   _email = value!;
                 },
@@ -136,15 +165,7 @@ class _AuthFormState extends State<AuthForm> {
                         color: kdarkBlue,
                       ),
                     ),
-                    validator: (value) {
-                      if (value != null) {
-                        if (value.length < 4) {
-                          return 'Username must be 4 characters long';
-                        }
-                        return null;
-                      }
-                      return 'Username must be 4 characters long';
-                    },
+                    validator: UsernameFieldValidator.validate,
                     onSaved: (value) {
                       _username = value!;
                     },
@@ -183,15 +204,7 @@ class _AuthFormState extends State<AuthForm> {
                     color: kdarkBlue,
                   ),
                 ),
-                validator: (value) {
-                  if (value != null) {
-                    if (value.length < 8) {
-                      return 'Password must be 8 characters long';
-                    }
-                    return null;
-                  }
-                  return 'Password must be 8 characters long';
-                },
+                validator: PasswordFieldValidator.validate,
                 onSaved: (value) {
                   _password = value!;
                 },
@@ -200,6 +213,9 @@ class _AuthFormState extends State<AuthForm> {
               if (_isStartRegister) const CircularProgressIndicator(),
               if (!_isStartRegister)
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: kdarkBlue, // Background color
+                  ),
                   child: Text(
                     _isLogin ? 'Login' : 'Register',
                     style: const TextStyle(
